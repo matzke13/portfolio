@@ -1,0 +1,425 @@
+<!DOCTYPE html>
+<html lang="de">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Sebastian Matzke</title>
+  <!-- Bootstrap CSS -->
+  <link
+    rel="stylesheet"
+    href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css"
+  />
+  <!-- Font Awesome -->
+  <link
+    rel="stylesheet"
+    href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css"
+  />
+
+  <style>
+    /****************************************************
+     * Allgemeine Stile
+     ****************************************************/
+    body {
+      background-color: #1a1a1a;
+      color: #f5f5f5;
+      font-family: "Helvetica Neue", Arial, sans-serif;
+      margin: 0;
+      padding: 0;
+    }
+
+    /****************************************************
+     * Navigation
+     ****************************************************/
+    .navbar {
+      padding: 1rem 2rem;
+      border-bottom: 1px solid #444;
+    }
+    .navbar-brand {
+      font-weight: bold;
+      font-size: 1.5rem;
+    }
+
+    /****************************************************
+     * Hero-Bereich
+     ****************************************************/
+    .hero {
+      /* dezentes Dark-Mode-Gradient */
+      background: linear-gradient(to right, #1a1a1a, #2e2e2e);
+      min-height: 70vh;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+      position: relative;
+      overflow: hidden;
+    }
+
+    /* Wrapper für Profilbild & pulsierenden Glow */
+    .hero-content {
+      position: relative;
+      display: inline-block;
+      z-index: 1; /* Damit Pseudo-Elemente im Hintergrund bleiben */
+    }
+
+    /* Weicher, verschwimmender, pulsierender „Glow“ */
+    .hero-content::before {
+      content: "";
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      width: 240px;
+      height: 240px;
+      transform: translate(-50%, -50%) scale(1);
+      border-radius: 50%;
+      background-color: #0d6efd;
+      filter: blur(50px);
+      opacity: 0.5;
+      z-index: -1; /* Hinter dem Profilbild platzieren */
+      animation: glowPulse 3s infinite ease-in-out;
+    }
+
+    @keyframes glowPulse {
+      0%,
+      100% {
+        transform: translate(-50%, -50%) scale(1);
+        opacity: 0.5;
+      }
+      50% {
+        transform: translate(-50%, -50%) scale(1.15);
+        opacity: 0.8;
+      }
+    }
+
+    .profile-img {
+      width: 160px;
+      height: 160px;
+      object-fit: cover;
+      border-radius: 50%;
+      border: 3px solid #f5f5f5;
+      box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
+      margin-bottom: 1rem;
+      position: relative;
+      z-index: 1; /* über dem Glow */
+    }
+
+    .hero h1 {
+      font-size: 3rem;
+      font-weight: bold;
+      margin-bottom: 0.5rem;
+    }
+    .hero p {
+      font-size: 1.2rem;
+      margin-bottom: 1.5rem;
+    }
+
+    /****************************************************
+     * Abschnitt-Titel
+     ****************************************************/
+    .section-title {
+      font-weight: bold;
+      text-transform: uppercase;
+      text-align: center;
+      margin-bottom: 2rem;
+      color: #0d6efd;
+      letter-spacing: 1px;
+    }
+
+    /****************************************************
+     * Abschnitt-Container
+     ****************************************************/
+    .section {
+      padding: 3rem 1rem;
+    }
+
+    /****************************************************
+     * Karten-Stil für Projekte
+     ****************************************************/
+    .project-card {
+      background-color: #2e2e2e;
+      border: none;
+      border-radius: 8px;
+      transition: transform 0.2s ease;
+      color: #f5f5f5;
+    }
+    .project-card:hover {
+      transform: scale(1.02);
+      box-shadow: 0 0 15px rgba(13, 110, 253, 0.15);
+    }
+
+    /* Gleiche Höhe für Video, Bilder und Carousel */
+    .project-card .card-img-top {
+      width: 100%;
+      height: 500px; /* gleiche Höhe wie Video, anpassen nach Bedarf */
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+    .project-card video {
+      width: 100%;
+      height: 180px; /* gleiche Höhe wie Bilder */
+      object-fit: cover;
+      border-top-left-radius: 8px;
+      border-top-right-radius: 8px;
+    }
+
+    /****************************************************
+     * Footer
+     ****************************************************/
+    footer {
+      text-align: center;
+      padding: 1rem;
+      background-color: #111;
+      border-top: 1px solid #444;
+    }
+
+    /****************************************************
+     * Scroll-Effekte (Fade In Up)
+     ****************************************************/
+    .fade-in-up {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: all 0.6s ease-out; /* Hier kannst du die Dauer anpassen (z.B. 1s) */
+    }
+    .fade-in-up.active {
+      opacity: 1;
+      transform: translateY(0);
+    }
+  </style>
+</head>
+
+<body>
+  <!-- Navigation -->
+  <nav class="navbar navbar-expand-lg navbar-dark bg-dark">
+    <a class="navbar-brand" href="#">Sebastian Matzke</a>
+    <button
+      class="navbar-toggler"
+      type="button"
+      data-bs-toggle="collapse"
+      data-bs-target="#navbarNav"
+      aria-controls="navbarNav"
+      aria-expanded="false"
+      aria-label="Navigation umschalten"
+    >
+      <span class="navbar-toggler-icon"></span>
+    </button>
+    <div class="collapse navbar-collapse" id="navbarNav">
+      <ul class="navbar-nav ms-auto">
+        <li class="nav-item">
+          <a class="nav-link" href="#about">Über mich</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#skills">Fähigkeiten</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#projects">Projekte</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="#contact">Kontakt</a>
+        </li>
+      </ul>
+    </div>
+  </nav>
+
+  <!-- Hero-Bereich -->
+  <section class="hero">
+    <div class="hero-content">
+      <img
+        src="./img/sebastian-matzke-forrest.jpg"
+        alt="Profilbild"
+        class="profile-img"
+      />
+      <h1>Hallo, ich bin Sebastian Matzke!</h1>
+      <p>Webentwickler und kreativer Designer</p>
+      <a href="#about" class="btn btn-primary">Mehr erfahren</a>
+    </div>
+  </section>
+
+  <!-- Über mich -->
+  <section id="about" class="section">
+    <h2 class="section-title fade-in-up">Über mich</h2>
+    <div class="container fade-in-up">
+      <div class="row justify-content-center">
+        <div class="col-md-8 text-center">
+          <p>
+            Herzlich willkommen! Ich bin Sebastian, ein leidenschaftlicher Webentwickler mit
+            einem Faible für moderne Designs.
+            Derzeit besuche ich eine HTL für Medientechnik in Wien.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Fähigkeiten -->
+  <section id="skills" class="section bg-dark">
+    <h2 class="section-title fade-in-up">Fähigkeiten</h2>
+    <div class="container">
+      <div class="row text-center">
+        <div class="col-md-4 mb-4 fade-in-up">
+          <i class="fas fa-laptop-code fa-3x mb-3" style="color: #0d6efd;"></i>
+          <h4>Full-Stack Developing</h4>
+          <p>
+            Ich bin darin geübt, Full-Stack-Anwendungen zu erstellen.
+            Im Laufe meiner bisherigen Laufbahn habe ich bis jetzt am meisten Vue, Quasar und Bootstrap verwendet.
+          </p>
+        </div>
+        <div class="col-md-4 mb-4 fade-in-up">
+          <i class="fas fa-camera fa-3x mb-3" style="color: #0d6efd;"></i>
+          <h4>Fotografie und Video</h4>
+          <p>
+            Immer wieder hatte ich in der Schule aber auch in meiner Freizeit mit Bild- oder Videoaufnahmen zu tun und beherrsche Programme wie Lightroom oder Premiere Pro.
+          </p>
+        </div>
+        <div class="col-md-4 mb-4 fade-in-up">
+          <i class="fas fa-cloud fa-3x mb-3" style="color: #0d6efd;"></i>
+          <h4>Adobe Creative Cloud</h4>
+          <p>
+            Photoshop & Co gehören zu meinen Lieblingstätigkeiten. In der Schule aber auch in Praktika habe ich diese immer wieder angewendet.
+          </p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Projekte -->
+  <section id="projects" class="section">
+    <h2 class="section-title fade-in-up">Projekte</h2>
+    <div class="container">
+      <div class="row g-4">
+        <!-- Projekt 1: RedBull Werbespot -->
+        <div class="col-md-4 fade-in-up">
+          <div class="card project-card">
+            <video class="card-img-top" controls>
+              <source src="./media/matzke-werbespot-online-version.mp4" type="video/mp4" />
+              Ihr Browser unterstützt das Video-Tag nicht.
+            </video>
+            <div class="card-body">
+              <h5 class="card-title">RedBull Werbespot</h5>
+              <p class="card-text">
+                Eine im Rahmen der Schule gedrehte Produktwerbung zum Thema RedBull Cola.
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projekt 2: Diplomarbeit PayWatch -->
+        <div class="col-md-4 fade-in-up">
+          <div class="card project-card">
+            <img
+              src="./img/paywatch.png"
+              class="card-img-top"
+              alt="Projekt 2"
+            />
+            <div class="card-body">
+              <h5 class="card-title">Diplomarbeit PayWatch</h5>
+              <p class="card-text">
+                Eine Quasar-basierte App, welche es ermöglicht, Rechnungen mittels KI einzulesen.
+                <a href="https://paywatch.htlwienwest.schulwebspace.at/">Mehr Infos!</a>
+              </p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Projekt 3: Fotografieprojekt "Getränke" mit Carousel -->
+        <div class="col-md-4 fade-in-up">
+          <div class="card project-card">
+            <div
+              id="fotografieCarousel"
+              class="carousel slide"
+              data-bs-ride="carousel"
+            >
+              <div class="carousel-inner">
+                <div class="carousel-item active">
+                  <img
+                    src="./img/MAT - Puntigamer  komplett.jpg"
+                    class="card-img-top d-block w-100"
+                    alt="Getränke Foto 1"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./img/MAT - Cola Dose von vorne.jpg"
+                    class="card-img-top d-block w-100"
+                    alt="Getränke Foto 2"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./img/MAT - Soda von vorne.jpg"
+                    class="card-img-top d-block w-100"
+                    alt="Getränke Foto 3"
+                  />
+                </div>
+                <div class="carousel-item">
+                  <img
+                    src="./img/MAT - Kaffee.jpg"
+                    class="card-img-top d-block w-100"
+                    alt="Getränke Foto 4"
+                  />
+                </div>
+              </div>
+              <button
+                class="carousel-control-prev"
+                type="button"
+                data-bs-target="#fotografieCarousel"
+                data-bs-slide="prev"
+              >
+                <span class="carousel-control-prev-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Vorheriges</span>
+              </button>
+              <button
+                class="carousel-control-next"
+                type="button"
+                data-bs-target="#fotografieCarousel"
+                data-bs-slide="next"
+              >
+                <span class="carousel-control-next-icon" aria-hidden="true"></span>
+                <span class="visually-hidden">Nächstes</span>
+              </button>
+            </div>
+            <div class="card-body">
+              <h5 class="card-title">Fotografieprojekt "Getränke"</h5>
+              <p class="card-text">
+                Im Rahmen eines Jahresprojekts wurden von mir Objekte zum Thema Getränke fotografiert.
+              </p>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <!-- Footer -->
+  <footer>
+    <p style="margin: 0;">© 2025 Sebastian Matzke</p>
+  </footer>
+
+  <!-- Bootstrap Bundle mit Popper.js -->
+  <script
+    src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"
+  ></script>
+
+  <!-- Intersection Observer für Scroll-Animationen -->
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+      const fadeElements = document.querySelectorAll(".fade-in-up");
+
+      const observer = new IntersectionObserver(
+        (entries, obs) => {
+          entries.forEach((entry) => {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("active"); // Klassenwechsel -> Transition startet
+              obs.unobserve(entry.target); // Nicht erneut beobachten
+            }
+          });
+        },
+        { threshold: 0.1 } // Ab 10% Sichtbarkeit
+      );
+
+      fadeElements.forEach((el) => {
+        observer.observe(el);
+      });
+    });
+  </script>
+</body>
+</html>
