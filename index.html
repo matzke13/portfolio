@@ -16,175 +16,168 @@
   />
 
   <style>
-    /****************************************************
-     * Allgemeine Stile
-     ****************************************************/
-    body {
-      background-color: #1a1a1a;
-      color: #f5f5f5;
-      font-family: "Helvetica Neue", Arial, sans-serif;
-      margin: 0;
-      padding: 0;
-    }
+/* Allgemeine Stile */
+body {
+  background-color: #1a1a1a;
+  color: #f5f5f5;
+  font-family: "Helvetica Neue", Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+}
 
-    /****************************************************
-     * Navigation
-     ****************************************************/
-    .navbar {
-      padding: 1rem 2rem;
-      border-bottom: 1px solid #444;
-    }
-    .navbar-brand {
-      font-weight: bold;
-      font-size: 1.5rem;
-    }
+/* Navigation */
+.navbar {
+  padding: 1rem 2rem;
+  border-bottom: 1px solid #444;
+}
+.navbar-brand {
+  font-weight: bold;
+  font-size: 1.5rem;
+}
 
-    /****************************************************
-     * Hero-Bereich
-     ****************************************************/
-    .hero {
-      /* dezentes Dark-Mode-Gradient */
-      background: linear-gradient(to right, #1a1a1a, #2e2e2e);
-      min-height: 70vh;
-      display: flex;
-      align-items: center;
-      justify-content: center;
-      text-align: center;
-      position: relative;
-      overflow: hidden;
-    }
+/* Hero-Bereich */
+.hero {
+  background: linear-gradient(to right, #1a1a1a, #2e2e2e);
+  min-height: 70vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  position: relative;
+  overflow: hidden;
+}
 
-    /* Wrapper für Profilbild & pulsierenden Glow */
-    .hero-content {
-      position: relative;
-      display: inline-block;
-      z-index: 1; /* Damit Pseudo-Elemente im Hintergrund bleiben */
-    }
+.hero-content {
+  position: relative;
+  display: inline-block;
+  z-index: 1;
+}
 
-    /* Weicher, verschwimmender, pulsierender „Glow“ */
-    .hero-content::before {
-      content: "";
-      position: absolute;
-      top: 50%;
-      left: 50%;
-      width: 240px;
-      height: 240px;
-      transform: translate(-50%, -50%) scale(1);
-      border-radius: 50%;
-      background-color: #0d6efd;
-      filter: blur(50px);
-      opacity: 0.5;
-      z-index: -1; /* Hinter dem Profilbild platzieren */
-      animation: glowPulse 3s infinite ease-in-out;
-    }
+.hero-content::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 240px;
+  height: 240px;
+  transform: translate(-50%, -50%) scale(1);
+  border-radius: 50%;
+  background-color: #888;
+  filter: blur(50px);
+  opacity: 0.5;
+  z-index: -1;
+  animation: glowPulse 3s infinite ease-in-out;
+}
 
-    @keyframes glowPulse {
-      0%,
-      100% {
-        transform: translate(-50%, -50%) scale(1);
-        opacity: 0.5;
-      }
-      50% {
-        transform: translate(-50%, -50%) scale(1.15);
-        opacity: 0.8;
-      }
-    }
+@keyframes glowPulse {
+  0%, 100% {
+    transform: translate(-50%, -50%) scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: translate(-50%, -50%) scale(1.15);
+    opacity: 0.8;
+  }
+}
 
-    .profile-img {
-      width: 160px;
-      height: 160px;
-      object-fit: cover;
-      border-radius: 50%;
-      border: 3px solid #f5f5f5;
-      box-shadow: 0 0 15px rgba(13, 110, 253, 0.3);
-      margin-bottom: 1rem;
-      position: relative;
-      z-index: 1; /* über dem Glow */
-    }
+.profile-img {
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 50%;
+  border: 3px solid #f5f5f5;
+  box-shadow: 0 0 15px rgba(136, 136, 136, 0.3);
+  margin-bottom: 1rem;
+  position: relative;
+  z-index: 1;
+}
 
-    .hero h1 {
-      font-size: 3rem;
-      font-weight: bold;
-      margin-bottom: 0.5rem;
-    }
-    .hero p {
-      font-size: 1.2rem;
-      margin-bottom: 1.5rem;
-    }
+.hero h1 {
+  font-size: 3rem;
+  font-weight: bold;
+  margin-bottom: 0.5rem;
+}
+.hero p {
+  font-size: 1.2rem;
+  margin-bottom: 1.5rem;
+}
 
-    /****************************************************
-     * Abschnitt-Titel
-     ****************************************************/
-    .section-title {
-      font-weight: bold;
-      text-transform: uppercase;
-      text-align: center;
-      margin-bottom: 2rem;
-      color: #0d6efd;
-      letter-spacing: 1px;
-    }
+.btn-primary {
+  background-color: #aaa;
+  border-color: #888;
+}
+.btn-primary:hover {
+  background-color: #ccc;
+  border-color: #999;
+}
 
-    /****************************************************
-     * Abschnitt-Container
-     ****************************************************/
-    .section {
-      padding: 3rem 1rem;
-    }
+/* Abschnitt-Titel */
+.section-title {
+  font-weight: bold;
+  text-transform: uppercase;
+  text-align: center;
+  margin-bottom: 2rem;
+  color: #ccc;
+  letter-spacing: 1px;
+}
 
-    /****************************************************
-     * Karten-Stil für Projekte
-     ****************************************************/
-    .project-card {
-      background-color: #2e2e2e;
-      border: none;
-      border-radius: 8px;
-      transition: transform 0.2s ease;
-      color: #f5f5f5;
-    }
-    .project-card:hover {
-      transform: scale(1.02);
-      box-shadow: 0 0 15px rgba(13, 110, 253, 0.15);
-    }
+/* Abschnitt-Container */
+.section {
+  padding: 3rem 1rem;
+}
 
-    /* Gleiche Höhe für Video, Bilder und Carousel */
-    .project-card .card-img-top {
-      width: 100%;
-      height: 500px; /* gleiche Höhe wie Video, anpassen nach Bedarf */
-      object-fit: cover;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
-    .project-card video {
-      width: 100%;
-      height: 180px; /* gleiche Höhe wie Bilder */
-      object-fit: cover;
-      border-top-left-radius: 8px;
-      border-top-right-radius: 8px;
-    }
+/* Karten-Stil für Projekte */
+.project-card {
+  background-color: #2e2e2e;
+  border: none;
+  border-radius: 8px;
+  transition: transform 0.2s ease;
+  color: #f5f5f5;
+}
+.project-card:hover {
+  transform: scale(1.02);
+  box-shadow: 0 0 15px rgba(136, 136, 136, 0.15);
+}
+.project-card .card-img-top {
+  width: 100%;
+  height: 500px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
+.project-card video {
+  width: 100%;
+  height: 180px;
+  object-fit: cover;
+  border-top-left-radius: 8px;
+  border-top-right-radius: 8px;
+}
 
-    /****************************************************
-     * Footer
-     ****************************************************/
-    footer {
-      text-align: center;
-      padding: 1rem;
-      background-color: #111;
-      border-top: 1px solid #444;
-    }
+/* Footer */
+footer {
+  text-align: center;
+  padding: 1rem;
+  background-color: #111;
+  border-top: 1px solid #444;
+}
 
-    /****************************************************
-     * Scroll-Effekte (Fade In Up)
-     ****************************************************/
-    .fade-in-up {
-      opacity: 0;
-      transform: translateY(20px);
-      transition: all 0.6s ease-out; /* Hier kannst du die Dauer anpassen (z.B. 1s) */
-    }
-    .fade-in-up.active {
-      opacity: 1;
-      transform: translateY(0);
-    }
+/* Scroll-Effekte (Fade In Up) */
+.fade-in-up {
+  opacity: 0;
+  transform: translateY(20px);
+  transition: all 0.6s ease-out;
+}
+.fade-in-up.active {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+/* Icons grau färben */
+.fas {
+  color: #aaa !important;
+}
   </style>
+
 </head>
 
 <body>
@@ -241,9 +234,8 @@
       <div class="row justify-content-center">
         <div class="col-md-8 text-center">
           <p>
-            Herzlich willkommen! Ich bin Sebastian, ein leidenschaftlicher Webentwickler mit
+            Herzlich willkommen! Ich bin Sebastian, ein leidenschaftlicher Webentwickler und Grafiker mit
             einem Faible für moderne Designs.
-            Derzeit besuche ich eine HTL für Medientechnik in Wien.
           </p>
         </div>
       </div>
@@ -251,7 +243,7 @@
   </section>
 
   <!-- Fähigkeiten -->
-  <section id="skills" class="section bg-dark">
+  <section id="skills" class="section bg-dark" style="background-color: black;">
     <h2 class="section-title fade-in-up">Fähigkeiten</h2>
     <div class="container">
       <div class="row text-center">
